@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   get '/sessions/login_failure', to: 'sessions#login_failure', as: 'login_failure'
 
-  get '/sessions/index', to: 'sessions#index', as: 'sessions'
+  get '/sessions', to: 'sessions#index', as: 'sessions'
+
+  delete '/sessions', to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

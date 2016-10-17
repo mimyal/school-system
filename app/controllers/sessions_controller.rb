@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def create
+  def create # initiated from Github, we built it
     auth_hash = request.env['omniauth.auth']
     redirect to login_failure_path unless auth_hash['uid']
 
@@ -20,15 +20,18 @@ class SessionsController < ApplicationController
       @user = User.build_from_github(auth_hash)
       render :creation_failure unless @user.save
     end
-
     # Save the user ID in the session
     session[:user_id] = @user.id
 
-    redirect_to sessions_path
+    redirect_to sessions_path # puts us to the index controller
   end
 
   def login_failure
+  end
 
+  def destroy
+    session.delete(:user_id)
+    redirect_to login_failure_path
   end
 
 
